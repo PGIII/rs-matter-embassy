@@ -34,7 +34,6 @@ fn main() {
 
     println!("cargo:rustc-link-arg-bins=--nmagic");
     println!("cargo:rustc-link-arg-bins=-Tlink.x");
-    // No -Tlink-rp.x needed: RP2350 does not use a second-stage bootloader
     println!("cargo:rustc-link-arg-bins=-Tdefmt.x");
 }
 
