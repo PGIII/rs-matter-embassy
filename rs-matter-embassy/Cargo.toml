@@ -136,7 +136,8 @@ max-exchanges-per-session-3 = ["rs-matter-stack/max-exchanges-per-session-3"]
 # General
 embassy-net = ["dep:embassy-net", "edge-nal-embassy", "openthread?/embassy-net-driver-channel", "esp-radio?/wifi"]
 esp = ["esp-radio", "esp-hal", "openthread?/esp-radio"]
-rp = ["cyw43", "cyw43-pio", "embassy-rp", "embassy-net-driver-channel"]
+rp = ["cyw43", "cyw43-pio", "embassy-rp", "embassy-net-driver-channel", "embassy-rp/rp2040"]
+rp2350 = ["cyw43", "cyw43-pio", "embassy-rp", "embassy-net-driver-channel", "embassy-rp/rp235xa"]
 nrf = ["embassy-nrf", "nrf-sdc", "nrf-mpsl", "portable-atomic", "openthread?/embassy-nrf"]
 log = ["dep:log", "rs-matter-stack/log", "openthread?/log", "embassy-net?/log", "edge-nal-embassy?/log", "trouble-host/log", "cyw43?/log"]
 defmt = ["dep:defmt", "rs-matter-stack/defmt", "openthread?/defmt", "embassy-net?/defmt", "edge-nal-embassy?/defmt", "trouble-host/defmt", "cyw43?/defmt", "cyw43-pio?/defmt"]
@@ -160,8 +161,8 @@ rand = { version = "0.8", default-features = false }
 embedded-storage-async = "0.4.1"
 sequential-storage = "3"
 
-embassy-net = { version = "0.7", optional = true }
-edge-nal-embassy = { version = "0.7", optional = true, features = ["proto-ipv4", "proto-ipv6", "multicast", "dhcpv4", "medium-ethernet"] }
+embassy-net = { version = "0.8", optional = true }
+edge-nal-embassy = { version = "0.8", optional = true, features = ["proto-ipv4", "proto-ipv6", "multicast", "dhcpv4", "medium-ethernet"] }
 
 trouble-host = { version = "0.5", features = ["gatt"] }
 bt-hci = "0.6"
@@ -177,7 +178,7 @@ esp-hal = { version = "1", optional = true, features = ["unstable"] }
 # Only necessary when `rs-matter-embassy` is providing extra-sugar for the RPi Pico W MCU
 cyw43 = { version = "0.6", optional = true, features = ["firmware-logs", "bluetooth"] }
 cyw43-pio = { version = "0.9", optional = true }
-embassy-rp = { version = "0.9", optional = true, features = ["unstable-pac", "rp2040"] }
+embassy-rp = { version = "0.9", optional = true, features = ["unstable-pac"] }
 embassy-net-driver-channel = { version = "0.3", optional = true }
 
 # Only necessary when `rs-matter-embassy` is providing extra-sugar for Nordic silicon

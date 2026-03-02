@@ -1,4 +1,4 @@
 #[cfg(feature = "esp")]
 pub mod esp;
-#[cfg(feature = "rp")]
+#[cfg(any(feature = "rp", feature = "rp2350"))]
 pub mod rp;

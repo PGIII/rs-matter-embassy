@@ -1,0 +1,69 @@
+[package]
+name = "rs-matter-embassy-rp2350-examples"
+version = "0.1.0"
+edition = "2021"
+resolver = "2"
+
+[[bin]]
+name = "light_wifi"
+harness = false
+
+[[bin]]
+name = "light_eth"
+harness = false
+
+[profile.dev]
+opt-level = "z"
+
+[profile.release]
+opt-level = "z"
+debug = 2
+debug-assertions = false
+lto = "fat"
+codegen-units = 1
+incremental = false
+overflow-checks = false
+
+[patch.crates-io]
+#rs-matter = { git = "https://github.com/project-chip/rs-matter" }
+rs-matter = { git = "https://github.com/sysgrok/rs-matter", branch = "next" }
+#rs-matter = { path = "../../../rs-matter/rs-matter" }
+rs-matter-stack = { git = "https://github.com/ivmarkov/rs-matter-stack.git", branch = "next" }
+#rs-matter-stack = { path = "../../../rs-matter-stack" }
+openthread = { git = "https://github.com/sysgrok/openthread.git", branch = "next" }
+#openthread = { version = "0.1", path = "../../../openthread/openthread" }
+
+[features]
+skip-cyw43-firmware = []
+
+[dependencies]
+embassy-executor = { version = "0.9", default-features = false, features = ["arch-cortex-m", "executor-thread", "defmt"] }
+embassy-time = { version = "0.5", default-features = false, features = ["defmt", "defmt-timestamp-uptime-ms"] }
+embassy-rp = { version = "0.9", features = ["defmt", "unstable-pac", "time-driver", "critical-section-impl", "rp235xa"] }
+embassy-futures = "0.1.1"
+embassy-sync = { version = "0.7", features = ["defmt"] }
+defmt = "0.3"
+embedded-alloc = "0.6"
+rs-matter-embassy = { path = "../../rs-matter-embassy", features = ["embassy-net", "rp2350", "defmt"] }
+
+# Wireless examples
+bt-hci = { version = "0.6", default-features = false, features = ["defmt"] }
+cyw43 = { version = "0.6", features = ["firmware-logs", "defmt", "bluetooth"] }
+cyw43-pio = "0.9"
+
+# W5500 Ethernet examples
+embassy-net-wiznet = { version = "0.2", features = ["defmt"] }
+embedded-hal-bus = { version = "0.1", features = ["async"] }
+rand_core = "0.9"
+
+cortex-m = "0.7.6"
+cortex-m-rt = "0.7"
+
+rtt-target = { version = "0.6", features = ["defmt"] }
+panic-rtt-target = "0.2"
+
+static_cell = "2"
+portable-atomic = { version = "1.5", features = ["critical-section"] }
+
+[build-dependencies]
+reqwest = { version = "0.12.9", features = ["blocking"]}
